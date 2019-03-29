@@ -28,13 +28,24 @@ public class Pathfinder : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
     }
 
-    public bool setDestination(Vector3 possibleDestination)
+    public bool findPath(Vector3 possibleDestination)
     {
-        if (NavMesh.SamplePosition(possibleDestination, out NavMeshHit hit, 1f, NavMesh.GetAreaFromName(walkableNavMeshArea))) //Destination is valid (on NavMesh)
+        //if (NavMesh.SamplePosition(possibleDestination, out NavMeshHit hit, distanceThreshold, NavMesh.GetAreaFromName(walkableNavMeshArea))) //Destination is valid (on NavMesh)
+        if (NavMesh.SamplePosition(possibleDestination, out NavMeshHit hit, distanceThreshold, NavMesh.AllAreas)) //Destination is valid (on NavMesh)
         {
             destination = hit.position;
-            StartCoroutine(showPath());
-            return true;
+
+            Debug.Log("<color=green>Destination set</color>");
+
+            if (updatePath())
+            {
+                StartCoroutine(showPath());
+                return true;
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>Destination could not be set</color>");
         }
 
         return false;
@@ -43,15 +54,15 @@ public class Pathfinder : MonoBehaviour
     IEnumerator showPath()
     {
         pathfinderState = PathfinderState.ENROUTE;
-        bool pathValid = true;
 
-        while (pathValid && distanceLeft() > distanceThreshold)
+        while (updatePath() && distanceLeft() > distanceThreshold)
         {
-            pathValid = updatePath();
             lineRenderer.enabled = true;
 
             yield return new WaitForSeconds(refreshRate);
         }
+
+        Debug.Log("<color=purple>Destination reached</color>");
 
         lineRenderer.enabled = false;
         pathfinderState = PathfinderState.IDLE;
@@ -59,10 +70,12 @@ public class Pathfinder : MonoBehaviour
 
     bool updatePath()
     {
-        NavMesh.CalculatePath(transform.position, destination, NavMesh.GetAreaFromName(walkableNavMeshArea), path);
-        if (path.status == NavMeshPathStatus.PathPartial)
+        NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, path);
+        if (path.status == NavMeshPathStatus.PathComplete) //Path found
         {
-            //Update line renderer points
+            lineRenderer.positionCount = path.corners.Length;
+            lineRenderer.SetPositions(path.corners);
+
             return true;
         }
 
