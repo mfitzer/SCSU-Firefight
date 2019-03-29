@@ -19,7 +19,9 @@ public class Pathfinder : MonoBehaviour
     public float distanceThreshold = 1f;
 
     [Tooltip("How often the path is updated.")]
-    public float refreshRate = 1f;
+    public float refreshRate = 0f;
+
+    public TextMesh distanceLeftDisplay;
 
     // Start is called before the first frame update
     void Start()
@@ -28,9 +30,8 @@ public class Pathfinder : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
     }
 
-    public bool findPath(Vector3 possibleDestination)
+    public bool findPath(Vector3 possibleDestination, float positionSampleRange = 1f)
     {
-        //if (NavMesh.SamplePosition(possibleDestination, out NavMeshHit hit, distanceThreshold, NavMesh.GetAreaFromName(walkableNavMeshArea))) //Destination is valid (on NavMesh)
         if (NavMesh.SamplePosition(possibleDestination, out NavMeshHit hit, distanceThreshold, NavMesh.AllAreas)) //Destination is valid (on NavMesh)
         {
             destination = hit.position;
@@ -55,28 +56,46 @@ public class Pathfinder : MonoBehaviour
     {
         pathfinderState = PathfinderState.ENROUTE;
 
-        while (updatePath() && distanceLeft() > distanceThreshold)
+        while (distanceLeft() > distanceThreshold)
         {
             lineRenderer.enabled = true;
 
             yield return new WaitForSeconds(refreshRate);
+
+            updatePath();
         }
 
         Debug.Log("<color=purple>Destination reached</color>");
 
         lineRenderer.enabled = false;
+        path.ClearCorners();
         pathfinderState = PathfinderState.IDLE;
     }
 
     bool updatePath()
     {
-        NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, path);
-        if (path.status == NavMeshPathStatus.PathComplete) //Path found
+        NavMeshPath possiblePath = new NavMeshPath();
+        NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, possiblePath);
+        if (possiblePath.status == NavMeshPathStatus.PathComplete) //Path found
         {
+            path = possiblePath;
             lineRenderer.positionCount = path.corners.Length;
             lineRenderer.SetPositions(path.corners);
 
             return true;
+        }
+        else if (possiblePath.status == NavMeshPathStatus.PathInvalid) //Draws path from current position (even off of the NavMesh)
+        {
+            lineRenderer.positionCount = path.corners.Length + 1;
+            lineRenderer.SetPosition(0, transform.position);
+            for (int i = 1; i <= path.corners.Length; i++)
+            {
+                lineRenderer.SetPosition(i, path.corners[i - 1]);
+            }
+        }
+        else //PathPartial
+        {
+            Debug.Log("<color=orange>Path cannot reach destination.</color>");
         }
 
         return false;
@@ -88,8 +107,16 @@ public class Pathfinder : MonoBehaviour
 
         for (int i = 0; i < path.corners.Length - 1; i++)
         {
+            if (i == 0)
+            {
+                distance += Vector3.Distance(transform.position, path.corners[0]);
+            }
+
             distance += Vector3.Distance(path.corners[i], path.corners[i + 1]);
         }
+
+        distanceLeftDisplay.text = distance.ToString("0.00") + " m"; //Display distance remaining in meters
+        //Debug.Log("Distance left: " + distance);
 
         return distance;
     }
