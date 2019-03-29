@@ -28,11 +28,12 @@ public class Pathfinder : MonoBehaviour
     {
         path = new NavMeshPath();
         lineRenderer = GetComponent<LineRenderer>();
+        distanceLeftDisplay.text = "";
     }
 
     public bool findPath(Vector3 possibleDestination, float positionSampleRange = 1f)
     {
-        if (NavMesh.SamplePosition(possibleDestination, out NavMeshHit hit, distanceThreshold, NavMesh.AllAreas)) //Destination is valid (on NavMesh)
+        if (NavMesh.SamplePosition(possibleDestination, out NavMeshHit hit, positionSampleRange, NavMesh.AllAreas)) //Destination is valid (on NavMesh)
         {
             destination = hit.position;
 
@@ -68,6 +69,7 @@ public class Pathfinder : MonoBehaviour
         Debug.Log("<color=purple>Destination reached</color>");
 
         lineRenderer.enabled = false;
+        distanceLeftDisplay.text = "";
         path.ClearCorners();
         pathfinderState = PathfinderState.IDLE;
     }
@@ -76,6 +78,7 @@ public class Pathfinder : MonoBehaviour
     {
         NavMeshPath possiblePath = new NavMeshPath();
         NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, possiblePath);
+
         if (possiblePath.status == NavMeshPathStatus.PathComplete) //Path found
         {
             path = possiblePath;
@@ -101,7 +104,7 @@ public class Pathfinder : MonoBehaviour
         return false;
     }
 
-    float distanceLeft() //This could probably be optimized
+    float distanceLeft()
     {
         float distance = 0f;
 
