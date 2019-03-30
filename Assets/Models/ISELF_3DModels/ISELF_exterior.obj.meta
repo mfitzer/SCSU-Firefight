@@ -1,0 +1,308 @@
+fileFormatVersion: 2
+guid: c77b614ea2cb77e4c9481a6c4004e1e1
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: 1stfloor_floor
+    100002: Awning
+    100004: Awning2
+    100006: Awning3
+    100008: Box001
+    100010: Box002
+    100012: Cylinder004
+    100014: Cylinder005
+    100016: Cylinder006
+    100018: Cylinder007
+    100020: Ext006
+    100022: Ext1
+    100024: Ext2
+    100026: ext3
+    100028: Ext4
+    100030: Ext5
+    100032: //RootNode
+    100034: Line001
+    100036: pent1
+    100038: PEnt3
+    400000: 1stfloor_floor
+    400002: Awning
+    400004: Awning2
+    400006: Awning3
+    400008: Box001
+    400010: Box002
+    400012: Cylinder004
+    400014: Cylinder005
+    400016: Cylinder006
+    400018: Cylinder007
+    400020: Ext006
+    400022: Ext1
+    400024: Ext2
+    400026: ext3
+    400028: Ext4
+    400030: Ext5
+    400032: //RootNode
+    400034: Line001
+    400036: pent1
+    400038: PEnt3
+    2100000: wire_184228153
+    2100002: SE2
+    2100004: roof
+    2100006: Brick
+    2100008: SE7
+    2100010: WE1
+    2100012: Material__96
+    2100014: SE6
+    2100016: Material__95
+    2100018: NE5
+    2100020: e1
+    2100022: e2
+    2100024: Material__27
+    2100026: SE4
+    2100028: SE1
+    2100030: NE1
+    2100032: Material__26
+    2100034: Material__50
+    2100036: Material__49
+    2100038: Pent
+    2300000: 1stfloor_floor
+    2300002: Awning
+    2300004: Awning2
+    2300006: Awning3
+    2300008: Box001
+    2300010: Box002
+    2300012: Cylinder004
+    2300014: Cylinder005
+    2300016: Cylinder006
+    2300018: Cylinder007
+    2300020: Ext006
+    2300022: Ext1
+    2300024: Ext2
+    2300026: ext3
+    2300028: Ext4
+    2300030: Ext5
+    2300032: Line001
+    2300034: pent1
+    2300036: PEnt3
+    3300000: 1stfloor_floor
+    3300002: Awning
+    3300004: Awning2
+    3300006: Awning3
+    3300008: Box001
+    3300010: Box002
+    3300012: Cylinder004
+    3300014: Cylinder005
+    3300016: Cylinder006
+    3300018: Cylinder007
+    3300020: Ext006
+    3300022: Ext1
+    3300024: Ext2
+    3300026: ext3
+    3300028: Ext4
+    3300030: Ext5
+    3300032: Line001
+    3300034: pent1
+    3300036: PEnt3
+    4300000: 1stfloor_floor
+    4300002: Awning
+    4300004: Awning2
+    4300006: Awning3
+    4300008: Box001
+    4300010: Box002
+    4300012: Cylinder004
+    4300014: Cylinder005
+    4300016: Cylinder006
+    4300018: Cylinder007
+    4300020: Ext006
+    4300022: Ext1
+    4300024: Ext2
+    4300026: ext3
+    4300028: Ext4
+    4300030: Ext5
+    4300032: Line001
+    4300034: pent1
+    4300036: PEnt3
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brick
+    second: {fileID: 2100000, guid: df83e7b67f582214ca3d3babe73ba742, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material__26
+    second: {fileID: 2100000, guid: 5ebfae11b6ef4d245abacf3dc68b8344, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material__27
+    second: {fileID: 2100000, guid: eaf0273c65598d9418665c2acaea6f2f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material__49
+    second: {fileID: 2100000, guid: b4451e3d061c5554e8057888e3cf0bbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material__50
+    second: {fileID: 2100000, guid: d3356020f43355b4c93a385dc7c5a4a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material__95
+    second: {fileID: 2100000, guid: f9726326e25d52b4bbc6c2797a76812c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material__96
+    second: {fileID: 2100000, guid: 6bf6c9501d594bf458e9fc9f1bfbe8cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NE1
+    second: {fileID: 2100000, guid: ee362324066caf9418e79b5b50f58e24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NE5
+    second: {fileID: 2100000, guid: 9a7b4d8b27ea38a44bc2c1186b1f994d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pent
+    second: {fileID: 2100000, guid: b1030b3191f4b7546888141f0e2a0352, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SE1
+    second: {fileID: 2100000, guid: da11084f977b3f445ae6318d3615c90a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SE2
+    second: {fileID: 2100000, guid: 77404ade1cda4f04fa1f5450594d686a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SE4
+    second: {fileID: 2100000, guid: 8e2390a63959b1843a95a689be2fcb62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SE6
+    second: {fileID: 2100000, guid: 7b04e4a08ccbc044ca2ac90878a3a2c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SE7
+    second: {fileID: 2100000, guid: f194ea12d55608b498a3db271c96cb91, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WE1
+    second: {fileID: 2100000, guid: f72130158e6f8bd47a184f05ea533a3d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: e1
+    second: {fileID: 2100000, guid: dbec1ec6099faca43a03348299f1342f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: e2
+    second: {fileID: 2100000, guid: 8f2d878f91116dd4a8d0c3162f4a92f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roof
+    second: {fileID: 2100000, guid: 304adc4e7b3220543937eb7fd3f9af3d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wire_184228153
+    second: {fileID: 2100000, guid: 3e148b1ae8e44904ba810540edc9ac85, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

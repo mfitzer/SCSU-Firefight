@@ -1,0 +1,212 @@
+fileFormatVersion: 2
+guid: a485833a0139cff41ac1ac3a434af410
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Firext010
+    100002: Firext011
+    100004: Firext012
+    100006: Firext013
+    100008: Firext014
+    100010: Firext015
+    100012: Firext016
+    100014: Firext017
+    100016: Firext018
+    100018: Firext019
+    100020: Firext020
+    100022: ISELF2nd_floor_wall
+    100024: ISELF2ndtFLoorc
+    100026: //RootNode
+    100028: Stairwellplatform003
+    100030: Stairwellplatform004
+    100032: Stairwellplatform005
+    100034: Stairwellplatform006
+    100036: StraightStair003
+    100038: StraightStair004
+    100040: StraightStair007
+    100042: StraightStair008
+    100044: StraightStair009
+    100046: StraightStair010
+    400000: Firext010
+    400002: Firext011
+    400004: Firext012
+    400006: Firext013
+    400008: Firext014
+    400010: Firext015
+    400012: Firext016
+    400014: Firext017
+    400016: Firext018
+    400018: Firext019
+    400020: Firext020
+    400022: ISELF2nd_floor_wall
+    400024: ISELF2ndtFLoorc
+    400026: //RootNode
+    400028: Stairwellplatform003
+    400030: Stairwellplatform004
+    400032: Stairwellplatform005
+    400034: Stairwellplatform006
+    400036: StraightStair003
+    400038: StraightStair004
+    400040: StraightStair007
+    400042: StraightStair008
+    400044: StraightStair009
+    400046: StraightStair010
+    2100000: Fire_Ext
+    2100002: walls
+    2100004: 2ndfloorplan
+    2100006: stairs
+    2300000: Firext010
+    2300002: Firext011
+    2300004: Firext012
+    2300006: Firext013
+    2300008: Firext014
+    2300010: Firext015
+    2300012: Firext016
+    2300014: Firext017
+    2300016: Firext018
+    2300018: Firext019
+    2300020: Firext020
+    2300022: ISELF2nd_floor_wall
+    2300024: ISELF2ndtFLoorc
+    2300026: Stairwellplatform003
+    2300028: Stairwellplatform004
+    2300030: Stairwellplatform005
+    2300032: Stairwellplatform006
+    2300034: StraightStair003
+    2300036: StraightStair004
+    2300038: StraightStair007
+    2300040: StraightStair008
+    2300042: StraightStair009
+    2300044: StraightStair010
+    3300000: Firext010
+    3300002: Firext011
+    3300004: Firext012
+    3300006: Firext013
+    3300008: Firext014
+    3300010: Firext015
+    3300012: Firext016
+    3300014: Firext017
+    3300016: Firext018
+    3300018: Firext019
+    3300020: Firext020
+    3300022: ISELF2nd_floor_wall
+    3300024: ISELF2ndtFLoorc
+    3300026: Stairwellplatform003
+    3300028: Stairwellplatform004
+    3300030: Stairwellplatform005
+    3300032: Stairwellplatform006
+    3300034: StraightStair003
+    3300036: StraightStair004
+    3300038: StraightStair007
+    3300040: StraightStair008
+    3300042: StraightStair009
+    3300044: StraightStair010
+    4300000: Firext010
+    4300002: Firext011
+    4300004: Firext012
+    4300006: Firext013
+    4300008: Firext014
+    4300010: Firext015
+    4300012: Firext016
+    4300014: Firext017
+    4300016: Firext018
+    4300018: Firext019
+    4300020: Firext020
+    4300022: ISELF2nd_floor_wall
+    4300024: ISELF2ndtFLoorc
+    4300026: Stairwellplatform003
+    4300028: Stairwellplatform004
+    4300030: Stairwellplatform005
+    4300032: Stairwellplatform006
+    4300034: StraightStair003
+    4300036: StraightStair004
+    4300038: StraightStair007
+    4300040: StraightStair008
+    4300042: StraightStair009
+    4300044: StraightStair010
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
