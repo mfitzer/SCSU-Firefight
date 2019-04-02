@@ -31,6 +31,7 @@ public class Pathfinder : MonoBehaviour
         distanceLeftDisplay.text = "";
     }
 
+    //Sets the destination of the pathfinder, whether its IDLE or ENROUTE (if ENROUTE, update destination)
     public bool findPath(Vector3 possibleDestination, float positionSampleRange = 1f)
     {
         if (NavMesh.SamplePosition(possibleDestination, out NavMeshHit hit, positionSampleRange, NavMesh.AllAreas)) //Destination is valid (on NavMesh)
@@ -39,7 +40,7 @@ public class Pathfinder : MonoBehaviour
 
             Debug.Log("<color=green>Destination set</color>");
 
-            if (updatePath())
+            if (pathfinderState == PathfinderState.IDLE && updatePath())
             {
                 StartCoroutine(showPath());
                 return true;
