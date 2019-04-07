@@ -12,7 +12,7 @@ public class Pathfinder : MonoBehaviour
     const string walkableNavMeshArea = "Walkable";
 
     LineRenderer lineRenderer;
-    Vector3 destination;
+    public Vector3 destination { get; private set; }
     NavMeshPath path;
 
     [Tooltip("How close to the destination one must be before the destination has been reached.")]
@@ -99,7 +99,7 @@ public class Pathfinder : MonoBehaviour
         }
         else //PathPartial
         {
-            Debug.Log("<color=orange>Path cannot reach destination.</color>");
+            Debug.Log("<color=Red>Path cannot reach destination.</color>");
         }
 
         return false;
