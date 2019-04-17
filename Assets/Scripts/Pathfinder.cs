@@ -11,7 +11,7 @@ public class Pathfinder : MonoBehaviour
 
     const string walkableNavMeshArea = "Walkable";
 
-    LineRenderer lineRenderer;
+    public LineRenderer lineRenderer;
     public Vector3 destination { get; private set; }
     NavMeshPath path;
 
@@ -22,14 +22,17 @@ public class Pathfinder : MonoBehaviour
     public float refreshRate = 0f;
 
     public TextMesh distanceLeftDisplay;
+    public Transform distanceLeftDisplayParent;
 
     UIManager uiManager;
+
+    public float distanceLeftDisplayOffset = 0.25f;
 
     // Start is called before the first frame update
     void Start()
     {
         path = new NavMeshPath();
-        lineRenderer = GetComponent<LineRenderer>();
+        //lineRenderer = GetComponent<LineRenderer>();
 
         uiManager = UIManager.Instance;
         distanceLeftDisplay.text = "";
@@ -83,7 +86,7 @@ public class Pathfinder : MonoBehaviour
     bool updatePath()
     {
         NavMeshPath possiblePath = new NavMeshPath();
-        NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, possiblePath);
+        NavMesh.CalculatePath(getSourcePosition(), destination, NavMesh.AllAreas, possiblePath);
 
         if (possiblePath.status == NavMeshPathStatus.PathComplete) //Path found
         {
@@ -110,6 +113,21 @@ public class Pathfinder : MonoBehaviour
         return false;
     }
 
+    //Position of pathfinder on navmesh
+    Vector3 getSourcePosition()
+    {
+        Vector3 sourcePos = transform.position;
+
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo))
+        {
+            sourcePos = hitInfo.point;
+        }
+
+        return sourcePos;
+    }
+
     float distanceLeft()
     {
         float distance = 0f;
@@ -125,6 +143,10 @@ public class Pathfinder : MonoBehaviour
         }
 
         distanceLeftDisplay.text = distance.ToString("0.00") + " m"; //Display distance remaining in meters
+
+        Vector3 pathVector = path.corners[1] - path.corners[0];
+        Vector3 displayPos = path.corners[0] + distanceLeftDisplayOffset * pathVector;
+        distanceLeftDisplayParent.transform.position = displayPos;
         //Debug.Log("Distance left: " + distance);
 
         return distance;

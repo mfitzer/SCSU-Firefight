@@ -52,7 +52,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         gazeProvider = FindObjectOfType<GazeProvider>();
-        closeMenu();
+        //closeMenu();
+        openMenu();
     }
 
     void processGaze()

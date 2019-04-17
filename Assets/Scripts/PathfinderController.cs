@@ -8,6 +8,8 @@ public class PathfinderController : MonoBehaviour
 
     public bool updateDestination = false;
 
+    public Transform destination;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,7 @@ public class PathfinderController : MonoBehaviour
 
     void findPath()
     {
-        if (pathfinder.findPath(transform.position))
+        if (pathfinder.findPath(destination.position))
         {
             Debug.Log("<color=green>Path found</color>");
         }
