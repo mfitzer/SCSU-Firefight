@@ -23,12 +23,17 @@ public class Pathfinder : MonoBehaviour
 
     public TextMesh distanceLeftDisplay;
 
+    UIManager uiManager;
+
     // Start is called before the first frame update
     void Start()
     {
         path = new NavMeshPath();
         lineRenderer = GetComponent<LineRenderer>();
+
+        uiManager = UIManager.Instance;
         distanceLeftDisplay.text = "";
+        distanceLeftDisplay.color = uiManager.primaryColor;
     }
 
     //Sets the destination of the pathfinder, whether its IDLE or ENROUTE (if ENROUTE, update destination)
@@ -99,7 +104,7 @@ public class Pathfinder : MonoBehaviour
         }
         else //PathPartial
         {
-            Debug.Log("<color=Red>Path cannot reach destination.</color>");
+            Debug.Log("<color=red>Path cannot reach destination.</color>");
         }
 
         return false;
@@ -123,5 +128,17 @@ public class Pathfinder : MonoBehaviour
         //Debug.Log("Distance left: " + distance);
 
         return distance;
+    }
+
+    //Updates the color in case it has changed
+    void updateUIColors()
+    {
+        distanceLeftDisplay.color = uiManager.primaryColor;
+        //lineRenderer.material.color = uiManager.primaryColor;
+    }
+
+    private void Update()
+    {
+        updateUIColors();
     }
 }
