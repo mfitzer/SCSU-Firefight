@@ -32,13 +32,13 @@ public class InterfaceButton : MonoBehaviour
 
     public void onHoverStart(Color hoverColor)
     {
-        Debug.Log("<color=purple>Hover start " + gameObject.name + "</color>");
+        //Debug.Log("<color=purple>Hover start " + gameObject.name + "</color>");
         setMaterialColor(hoverColor);
     }
 
     public void onHoverStop(Color neutralColor)
     {
-        Debug.Log("<color=purple>Hover stop " + gameObject.name + "</color>");
+        //Debug.Log("<color=purple>Hover stop " + gameObject.name + "</color>");
         setMaterialColor(neutralColor);
     }
 

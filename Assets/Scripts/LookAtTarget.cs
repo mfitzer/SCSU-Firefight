@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class LookAtTarget : MonoBehaviour
 {
-    public Transform target;
+    Transform target;
+
+    private void Start()
+    {
+        target = Camera.main.transform;
+    }
 
     // Update is called once per frame
     void Update()

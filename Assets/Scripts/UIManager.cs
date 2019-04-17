@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     GazeProvider gazeProvider;
     Vector3 gazeHitpoint;
     InterfaceButton buttonInGaze; //The button being hit by the current gaze raycast
+    public LayerMask gazeLayerMask;
 
     [Tooltip("Max distance UI can be interacted with")]
     public float gazeMaxDistance = 50f;
@@ -36,6 +37,8 @@ public class UIManager : MonoBehaviour
     public GameObject hazardMarkerPrefab;
     public GameObject waypointMarkerPrefab;
     public Transform menu;
+
+    GameObject markerBeingPlaced;
 
     public bool updateColors = true;
 
@@ -57,22 +60,32 @@ public class UIManager : MonoBehaviour
         RaycastHit hitInfo;
         if (gazeProvider)
         {
-            if (Physics.Raycast(gazeProvider.GazeOrigin, gazeProvider.GazeDirection, out hitInfo, gazeMaxDistance, Physics.DefaultRaycastLayers)) //Gaze hit something
+            if (Physics.Raycast(gazeProvider.GazeOrigin, gazeProvider.GazeDirection, out hitInfo, gazeMaxDistance, gazeLayerMask)) //Gaze hit something
             {
                 //Debug.Log("<color=blue>Unity Gaze hit: " + hitInfo.collider.name + "</color>");
-                gazeHitpoint = hitInfo.collider.transform.position; //Store hitInfo until next frame
+                gazeHitpoint = hitInfo.point; //Store hitInfo until next frame
 
-                GameObject objHit = hitInfo.collider.gameObject;
-                if (buttonInGaze && buttonInGaze.gameObject != objHit) //Hit a button last frame and objHit is not that button
+                if (uiState == UIState.DISPLAYING_MENU)
                 {
-                    buttonInGaze.onHoverStop(primaryColor); //Was hovering on button
+                    GameObject objHit = hitInfo.collider.gameObject;
+                    if (buttonInGaze && buttonInGaze.gameObject != objHit) //Hit a button last frame and objHit is not that button
+                    {
+                        buttonInGaze.onHoverStop(primaryColor); //Was hovering on button
+                    }
+
+                    buttonInGaze = objHit.GetComponent<InterfaceButton>();
+
+                    if (buttonInGaze) //objHit is an InterfaceButton
+                    {
+                        buttonInGaze.onHoverStart(buttonHighlightColor);
+                    }
                 }
-
-                buttonInGaze = objHit.GetComponent<InterfaceButton>();
-
-                if (buttonInGaze) //objHit is an InterfaceButton
+                else if (uiState == UIState.MARKING_HAZARD || uiState == UIState.SETTING_WAYPOINT)
                 {
-                    buttonInGaze.onHoverStart(buttonHighlightColor);
+                    if (markerBeingPlaced && gazeProvider.HitInfo.collider.gameObject != markerBeingPlaced) //Marker is not null && not looking at the marker
+                    {
+                        markerBeingPlaced.transform.position = gazeHitpoint;
+                    }
                 }
             }
             else
@@ -95,11 +108,27 @@ public class UIManager : MonoBehaviour
         uiState = UIState.MARKING_HAZARD;
 
         //Display airtap GIF
+
+        markerBeingPlaced = Instantiate(hazardMarkerPrefab, gazeHitpoint, hazardMarkerPrefab.transform.rotation);
+        Collider collider = markerBeingPlaced.GetComponent<Collider>();
+        if (collider) //Disable collider
+        {
+            collider.enabled = false;
+        }
     }
 
     public void placeHazardMarker()
     {
-        Instantiate(hazardMarkerPrefab, gazeHitpoint, hazardMarkerPrefab.transform.rotation);
+        if (uiState == UIState.MARKING_HAZARD)
+        {
+            uiState = UIState.IDLE;
+            Collider collider = markerBeingPlaced.GetComponent<Collider>();
+            if (collider) //Enable collider
+            {
+                collider.enabled = true;
+            }
+            markerBeingPlaced = null;
+        }
     }
 
     public void startWaypointMarkerPlacement()
@@ -109,11 +138,27 @@ public class UIManager : MonoBehaviour
         uiState = UIState.SETTING_WAYPOINT;
 
         //Display airtap GIF
+
+        markerBeingPlaced = Instantiate(waypointMarkerPrefab, gazeHitpoint, waypointMarkerPrefab.transform.rotation);
+        Collider collider = markerBeingPlaced.GetComponent<Collider>();
+        if (collider) //Disable collider
+        {
+            collider.enabled = false;
+        }
     }
 
     public void placeWaypointMarker()
     {
-        Instantiate(waypointMarkerPrefab, gazeHitpoint, hazardMarkerPrefab.transform.rotation);
+        if (uiState == UIState.SETTING_WAYPOINT)
+        {
+            uiState = UIState.IDLE;
+            Collider collider = markerBeingPlaced.GetComponent<Collider>();
+            if (collider) //Enable collider
+            {
+                collider.enabled = true;
+            }
+            markerBeingPlaced = null;
+        }
     }
 
     public void openMenu()
@@ -152,6 +197,9 @@ public class UIManager : MonoBehaviour
     {
         switch (uiState)
         {
+            case UIState.IDLE:
+                openMenu();
+                break;
             case UIState.DISPLAYING_MENU:
                 pressButton();
                 break;
@@ -161,15 +209,6 @@ public class UIManager : MonoBehaviour
             case UIState.SETTING_WAYPOINT:
                 placeWaypointMarker();
                 break;
-        }
-    }
-
-    //Handles the event of a bloom gesture being performed
-    public void bloomGestureHandler()
-    {
-        if (uiState == UIState.IDLE)
-        {
-            openMenu();
         }
     }
 

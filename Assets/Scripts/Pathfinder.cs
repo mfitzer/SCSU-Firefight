@@ -134,7 +134,6 @@ public class Pathfinder : MonoBehaviour
     void updateUIColors()
     {
         distanceLeftDisplay.color = uiManager.primaryColor;
-        //lineRenderer.material.color = uiManager.primaryColor;
     }
 
     private void Update()
