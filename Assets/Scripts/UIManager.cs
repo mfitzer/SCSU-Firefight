@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     enum UIState { IDLE, DISPLAYING_MENU, MARKING_HAZARD, SETTING_WAYPOINT }
     UIState uiState = UIState.IDLE;
 
+    enum GazeStatus { VALID, INVALID }
+    GazeStatus gazeStatus;
+
     //Colors
     public List<Material> primaryColorMaterials;
     public Color primaryColor;
@@ -64,6 +67,7 @@ public class UIManager : MonoBehaviour
             if (Physics.Raycast(gazeProvider.GazeOrigin, gazeProvider.GazeDirection, out hitInfo, gazeMaxDistance, gazeLayerMask)) //Gaze hit something
             {
                 //Debug.Log("<color=blue>Unity Gaze hit: " + hitInfo.collider.name + "</color>");
+                gazeStatus = GazeStatus.VALID;
                 gazeHitpoint = hitInfo.point; //Store hitInfo until next frame
 
                 if (uiState == UIState.DISPLAYING_MENU)
@@ -91,11 +95,13 @@ public class UIManager : MonoBehaviour
             }
             else
             {
+                gazeStatus = GazeStatus.INVALID;
                 //Debug.Log("<color=red>Gaze hit nothing</color>");
             }
         }
         else
         {
+            gazeStatus = GazeStatus.INVALID;
             //Debug.Log("<color=red>Gaze Provider is null</color>");
         }
     }
@@ -221,6 +227,11 @@ public class UIManager : MonoBehaviour
         {
             mat.color = color;
         }
+    }
+
+    public Vector3 getAirTapHit()
+    {
+        return gazeStatus == GazeStatus.VALID ? gazeHitpoint : Vector3.zero;
     }
 
     void Update()

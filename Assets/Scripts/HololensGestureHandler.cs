@@ -8,13 +8,15 @@ public class HololensGestureHandler : MonoBehaviour
     private void Start()
     {
         gestureRecognizer = new GestureRecognizer();
-        gestureRecognizer.SetRecognizableGestures(GestureSettings.Tap | GestureSettings.DoubleTap);
+        gestureRecognizer.SetRecognizableGestures(GestureSettings.Tap);
         gestureRecognizer.Tapped += tapHandler;
         gestureRecognizer.StartCapturingGestures();
     }
 
     void tapHandler(TappedEventArgs args)
     {
-        UIManager.Instance.airTapGestureHandler();
+        //UIManager.Instance.airTapGestureHandler();
+
+        HololensConfigController.Instance.airTapHandler();
     }
 }
