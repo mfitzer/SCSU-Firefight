@@ -122,7 +122,25 @@ public class Pathfinder : MonoBehaviour
 
         if (Physics.Raycast(transform.position, Vector3.down, out hitInfo))
         {
-            sourcePos = hitInfo.point;
+            if (NavMesh.SamplePosition(hitInfo.point, out NavMeshHit navHit, 1f, NavMesh.AllAreas)) //Position is valid (on NavMesh)
+            {
+                sourcePos = navHit.position;
+            }
+            else if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 2f, NavMesh.AllAreas)) //Position is valid (on NavMesh)
+            {
+                sourcePos = hit.position;
+            }
+            else
+            {
+                sourcePos = hitInfo.point;
+            }
+        }
+        else
+        {
+            if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 2f, NavMesh.AllAreas)) //Position is valid (on NavMesh)
+            {
+                sourcePos = hit.position;
+            }
         }
 
         return sourcePos;

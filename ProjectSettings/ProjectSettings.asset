@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: SCSU VizLab
   productName: SCSU-Firefight
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -553,7 +553,7 @@ PlayerSettings:
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
   metroWideTileShowName: 0
-  metroSupportStreamingInstall: 0
+  metroSupportStreamingInstall: 1
   metroLastRequiredScene: 0
   metroDefaultTileSize: 1
   metroTileForegroundText: 2

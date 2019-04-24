@@ -24,31 +24,37 @@ public class FirefighterController : MonoBehaviour
 
     public void setDestination(Vector3 destination)
     {
-        navAgent.SetDestination(destination);
+        if (navAgent.enabled)
+        {
+            navAgent.SetDestination(destination);
+        }
     }
 
     void controlAnimationState()
     {
         //Debug.Log("<color=purple>Destination: " + navAgent.destination + "</color>");
 
-        if (navAgent.pathStatus == NavMeshPathStatus.PathComplete) //Destination not reached, path complete, keep walking
+        if (navAgent.enabled)
         {
-            //Debug.Log("Remaining distance: " + navAgent.remainingDistance);
-            if (navAgent.remainingDistance > 0)
+            if (navAgent.pathStatus == NavMeshPathStatus.PathComplete) //Destination not reached, path complete, keep walking
             {
-                anim.SetBool("isWalking", true);
-                navAgent.isStopped = false;
+                //Debug.Log("Remaining distance: " + navAgent.remainingDistance);
+                if (navAgent.remainingDistance > 0)
+                {
+                    anim.SetBool("isWalking", true);
+                    navAgent.isStopped = false;
+                }
+                else
+                {
+                    anim.SetBool("isWalking", false);
+                    navAgent.isStopped = true;
+                }
             }
-            else
+            else //Destination reached, stop walking
             {
                 anim.SetBool("isWalking", false);
                 navAgent.isStopped = true;
             }
-        }
-        else //Destination reached, stop walking
-        {
-            anim.SetBool("isWalking", false);
-            navAgent.isStopped = true;
         }
     }
 
