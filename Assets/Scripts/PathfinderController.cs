@@ -6,12 +6,17 @@ public class PathfinderController : MonoBehaviour
 {
     public Pathfinder pathfinder;
 
-    public bool updateDestination = false;
+    public bool update = false;
 
     public Transform destination;
 
     // Start is called before the first frame update
     void Start()
+    {
+        //findPath();
+    }
+
+    public void updateDestination()
     {
         findPath();
     }
@@ -31,11 +36,11 @@ public class PathfinderController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (updateDestination)
+        if (update)
         {
             findPath();
 
-            updateDestination = false;
+            update = false;
         }
     }
 }

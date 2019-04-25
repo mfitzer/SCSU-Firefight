@@ -36,11 +36,13 @@ public class WorldAnchorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        exportedAnchorStoreData = new List<byte>();
         savedWorldAnchors = new Dictionary<GameObject, WorldAnchor>();
-        exportFilePath = Path.Combine(Application.persistentDataPath, "Firefight-WorldAnchors.dat");
-
+        HololensConfigController.Instance.logMessage("Attempting to load anchor store...");
         WorldAnchorStore.GetAsync(AnchorStoreLoaded);
+
+        //exportedAnchorStoreData = new List<byte>();
+        //exportFilePath = Path.Combine(Application.persistentDataPath, "Firefight-WorldAnchors.dat");
+
 
         /*if (File.Exists(exportFilePath))
         {
@@ -63,7 +65,6 @@ public class WorldAnchorManager : MonoBehaviour
         if (store != null)
         {
             worldAnchorStore = store;
-            Debug.Log("AnchorStore count: " + worldAnchorStore.anchorCount);
             HololensConfigController.Instance.logMessage("AnchorStore count: " + worldAnchorStore.anchorCount);
 
             loadAnchors();
@@ -154,14 +155,23 @@ public class WorldAnchorManager : MonoBehaviour
             if (worldAnchorStore.Delete(obj.name))
             {
                 HololensConfigController.Instance.logMessage(obj.name + " world anchor deleted");
+                // remove any world anchor component from the game object so that it can be moved
+                DestroyImmediate(anchorToRemove);
             }
-            // remove any world anchor component from the game object so that it can be moved
-            DestroyImmediate(anchorToRemove);
+            else
+            {
+                HololensConfigController.Instance.logMessage(obj.name + " world anchor could not be deleted");
+            }
         }
     }
 
     public void clearAnchors()
     {
+        foreach (KeyValuePair<GameObject, WorldAnchor> keyValue in savedWorldAnchors)
+        {
+            DestroyImmediate(keyValue.Value);
+        }
+        savedWorldAnchors.Clear();
         worldAnchorStore.Clear();
         //if (File.Exists(exportFilePath))
         //{

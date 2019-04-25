@@ -8,12 +8,22 @@ public class LookAtTarget : MonoBehaviour
 
     private void Start()
     {
-        target = Camera.main.transform;
+        if (Camera.main)
+        {
+            target = Camera.main.transform;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.LookRotation(transform.position - target.position, Vector3.up);
+        if (target)
+        {
+            transform.rotation = Quaternion.LookRotation(transform.position - target.position, Vector3.up);
+        }
+        else if (Camera.main)
+        {
+            target = Camera.main.transform;
+        }
     }
 }

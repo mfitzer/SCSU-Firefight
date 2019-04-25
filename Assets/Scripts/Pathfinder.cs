@@ -45,12 +45,17 @@ public class Pathfinder : MonoBehaviour
         if (NavMesh.SamplePosition(possibleDestination, out NavMeshHit hit, positionSampleRange, NavMesh.AllAreas)) //Destination is valid (on NavMesh)
         {
             destination = hit.position;
+            Debug.Log("new destination: " + destination);
 
             Debug.Log("<color=green>Destination set</color>");
 
-            if (pathfinderState == PathfinderState.IDLE && updatePath())
+            if (updatePath())
             {
-                StartCoroutine(showPath());
+                if (pathfinderState == PathfinderState.IDLE)
+                {
+                    StartCoroutine(showPath()); //Only show new path if a path is not arleady being displayed
+                }
+
                 return true;
             }
         }
@@ -73,6 +78,7 @@ public class Pathfinder : MonoBehaviour
             yield return new WaitForSeconds(refreshRate);
 
             updatePath();
+            Debug.Log("Update path");
         }
 
         Debug.Log("<color=purple>Destination reached</color>");
@@ -124,14 +130,17 @@ public class Pathfinder : MonoBehaviour
         {
             if (NavMesh.SamplePosition(hitInfo.point, out NavMeshHit navHit, 1f, NavMesh.AllAreas)) //Position is valid (on NavMesh)
             {
+                //Debug.Log("Raycast navhit");
                 sourcePos = navHit.position;
             }
             else if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 2f, NavMesh.AllAreas)) //Position is valid (on NavMesh)
             {
+                //Debug.Log("Position navhit");
                 sourcePos = hit.position;
             }
             else
             {
+                //Debug.Log("Raycast");
                 sourcePos = hitInfo.point;
             }
         }
@@ -139,7 +148,12 @@ public class Pathfinder : MonoBehaviour
         {
             if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 2f, NavMesh.AllAreas)) //Position is valid (on NavMesh)
             {
+                //Debug.Log("navhit");
                 sourcePos = hit.position;
+            }
+            else
+            {
+                //Debug.Log("position");
             }
         }
 
@@ -163,8 +177,9 @@ public class Pathfinder : MonoBehaviour
         distanceLeftDisplay.text = distance.ToString("0.00") + " m"; //Display distance remaining in meters
 
         Vector3 pathVector = path.corners[1] - path.corners[0];
-        Vector3 displayPos = path.corners[0] + distanceLeftDisplayOffset * pathVector;
-        distanceLeftDisplayParent.transform.position = displayPos;
+        //Vector3 displayPos = path.corners[0] + distanceLeftDisplayOffset * pathVector;
+        distanceLeftDisplayParent.transform.position = path.corners[0];
+        distanceLeftDisplayParent.rotation = Quaternion.LookRotation(pathVector, Vector3.up);
         //Debug.Log("Distance left: " + distance);
 
         return distance;
@@ -174,6 +189,11 @@ public class Pathfinder : MonoBehaviour
     void updateUIColors()
     {
         distanceLeftDisplay.color = uiManager.primaryColor;
+    }
+
+    private void OnDisable()
+    {
+        pathfinderState = PathfinderState.IDLE;
     }
 
     private void Update()
