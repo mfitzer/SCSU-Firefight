@@ -45,6 +45,8 @@ public class UIManager : MonoBehaviour
 
     public bool updateColors = true;
 
+    public PathfinderController pathfinderController;
+
     //TESTING
     public bool showMenu = false;
     public bool hideMenu = false;
@@ -164,6 +166,8 @@ public class UIManager : MonoBehaviour
             {
                 collider.enabled = true;
             }
+
+            pathfinderController.setWaypoint(markerBeingPlaced.transform);
             markerBeingPlaced = null;
         }
     }

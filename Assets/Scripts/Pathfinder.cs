@@ -28,6 +28,8 @@ public class Pathfinder : MonoBehaviour
 
     public float distanceLeftDisplayOffset = 0.25f;
 
+    public PathfinderController pathfinderController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,18 +69,66 @@ public class Pathfinder : MonoBehaviour
         return false;
     }
 
+    public Transform findPath(List<Transform> possibleDestinations, float positionSampleRange = 1f)
+    {
+        Vector3 sourcePos = getSourcePosition();
+
+        if (possibleDestinations.Count > 0)
+        {
+            Transform closestDestination = possibleDestinations[0];
+            float shortestDistance = float.PositiveInfinity;
+
+            foreach (Transform dest in possibleDestinations)
+            {
+                if (NavMesh.SamplePosition(dest.position, out NavMeshHit navHit, positionSampleRange, NavMesh.AllAreas)) //Destination is valid (on NavMesh)
+                {
+                    NavMeshPath possiblePath = calculatePath(sourcePos, dest.position);
+
+                    float pathLength = distanceLeft(dest.position, possiblePath);
+                    if (possiblePath.status == NavMeshPathStatus.PathComplete && pathLength < shortestDistance)
+                    {
+                        closestDestination = dest;
+                        shortestDistance = pathLength;
+                    }
+
+                    Debug.Log("Possible path length: " + pathLength);
+                }
+            }
+
+            Debug.Log("Shortest distance: " + shortestDistance);
+
+
+            destination = closestDestination.position;
+            closestDestination.gameObject.SetActive(true);
+            Debug.Log("new destination: " + destination);
+            Debug.Log("<color=green>Destination set</color>");
+
+            if (updatePath())
+            {
+                if (pathfinderState == PathfinderState.IDLE)
+                {
+                    StartCoroutine(showPath()); //Only show new path if a path is not arleady being displayed
+                }
+
+                return closestDestination;
+            }
+        }
+
+        return null;
+    }
+
     IEnumerator showPath()
     {
         pathfinderState = PathfinderState.ENROUTE;
 
-        while (distanceLeft() > distanceThreshold)
+        while (distanceLeft(getSourcePosition(), path) > distanceThreshold)
         {
             lineRenderer.enabled = true;
 
             yield return new WaitForSeconds(refreshRate);
 
             updatePath();
-            Debug.Log("Update path");
+            //Debug.Log("Update path");
         }
 
         Debug.Log("<color=purple>Destination reached</color>");
@@ -87,12 +137,13 @@ public class Pathfinder : MonoBehaviour
         distanceLeftDisplay.text = "";
         path.ClearCorners();
         pathfinderState = PathfinderState.IDLE;
+
+        pathfinderController.destinationReached();
     }
 
     bool updatePath()
     {
-        NavMeshPath possiblePath = new NavMeshPath();
-        NavMesh.CalculatePath(getSourcePosition(), destination, NavMesh.AllAreas, possiblePath);
+        NavMeshPath possiblePath = calculatePath(getSourcePosition(), destination);
 
         if (possiblePath.status == NavMeshPathStatus.PathComplete) //Path found
         {
@@ -117,6 +168,15 @@ public class Pathfinder : MonoBehaviour
         }
 
         return false;
+    }
+
+    NavMeshPath calculatePath(Vector3 sourcePos, Vector3 targetPos)
+    {
+        NavMeshPath possiblePath = new NavMeshPath();
+
+        NavMesh.CalculatePath(getSourcePosition(), destination, NavMesh.AllAreas, possiblePath);
+
+        return possiblePath;
     }
 
     //Position of pathfinder on navmesh
@@ -160,29 +220,32 @@ public class Pathfinder : MonoBehaviour
         return sourcePos;
     }
 
-    float distanceLeft()
+    float distanceLeft(Vector3 targetDestination, NavMeshPath navPath)
     {
         float distance = 0f;
 
-        for (int i = 0; i < path.corners.Length - 1; i++)
+        for (int i = 0; i < navPath.corners.Length - 1; i++)
         {
             if (i == 0)
             {
-                distance += Vector3.Distance(transform.position, path.corners[0]);
+                distance += Vector3.Distance(targetDestination, navPath.corners[0]);
             }
 
-            distance += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+            distance += Vector3.Distance(navPath.corners[i], navPath.corners[i + 1]);
         }
 
-        distanceLeftDisplay.text = distance.ToString("0.00") + " m"; //Display distance remaining in meters
+        return distance;
+    }
+
+    void displayDistanceLeft(Vector3 distance)
+    {
+        distanceLeftDisplay.text = distanceLeft(getSourcePosition(), path).ToString("0.00") + " m"; //Display distance remaining in meters
 
         Vector3 pathVector = path.corners[1] - path.corners[0];
         //Vector3 displayPos = path.corners[0] + distanceLeftDisplayOffset * pathVector;
         distanceLeftDisplayParent.transform.position = path.corners[0];
         distanceLeftDisplayParent.rotation = Quaternion.LookRotation(pathVector, Vector3.up);
         //Debug.Log("Distance left: " + distance);
-
-        return distance;
     }
 
     //Updates the color in case it has changed
