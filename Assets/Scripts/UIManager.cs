@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
     public GameObject hazardMarkerPrefab;
     public GameObject waypointMarkerPrefab;
     public Transform menu;
+    public Transform UIParent;
 
     GameObject markerBeingPlaced;
 
@@ -120,7 +121,7 @@ public class UIManager : MonoBehaviour
 
         //Display airtap GIF
 
-        markerBeingPlaced = Instantiate(hazardMarkerPrefab, gazeHitpoint, hazardMarkerPrefab.transform.rotation);
+        markerBeingPlaced = Instantiate(hazardMarkerPrefab, gazeHitpoint, hazardMarkerPrefab.transform.rotation, UIParent);
         Collider collider = markerBeingPlaced.GetComponent<Collider>();
         if (collider) //Disable collider
         {
@@ -150,7 +151,7 @@ public class UIManager : MonoBehaviour
 
         //Display airtap GIF
 
-        markerBeingPlaced = Instantiate(waypointMarkerPrefab, gazeHitpoint, waypointMarkerPrefab.transform.rotation);
+        markerBeingPlaced = Instantiate(waypointMarkerPrefab, gazeHitpoint, waypointMarkerPrefab.transform.rotation, UIParent);
         Collider collider = markerBeingPlaced.GetComponent<Collider>();
         if (collider) //Disable collider
         {

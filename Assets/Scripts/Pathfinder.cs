@@ -30,6 +30,8 @@ public class Pathfinder : MonoBehaviour
 
     public PathfinderController pathfinderController;
 
+    public float pathHeight = 0.35f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -150,7 +152,11 @@ public class Pathfinder : MonoBehaviour
         {
             path = possiblePath;
             lineRenderer.positionCount = path.corners.Length;
-            lineRenderer.SetPositions(path.corners);
+            for (int i = 0; i < path.corners.Length; i++)
+            {
+                Vector3 cornerPos = path.corners[i];
+                lineRenderer.SetPosition(i, new Vector3(cornerPos.x, cornerPos.y + pathHeight, cornerPos.z));
+            }
 
             return true;
         }
@@ -160,7 +166,8 @@ public class Pathfinder : MonoBehaviour
             lineRenderer.SetPosition(0, transform.position);
             for (int i = 1; i <= path.corners.Length; i++)
             {
-                lineRenderer.SetPosition(i, path.corners[i - 1]);
+                Vector3 cornerPos = path.corners[i - 1];
+                lineRenderer.SetPosition(i, new Vector3(cornerPos.x, cornerPos.y + pathHeight, cornerPos.z));
             }
         }
         else //PathPartial

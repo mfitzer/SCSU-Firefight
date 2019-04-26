@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class HazardMarker : InterfaceButton
 {
-    public GameObject removeButton;
+    public InterfaceButton removeButton;
     public Transform icon;
+    public GameObject markerParent;
+
+    bool hidingButton = false;
+
+    public float hideButtonDelay = 5f;
 
     private void Start()
     {
-        removeButton.SetActive(false);
+        removeButton.gameObject.SetActive(false);
     }
 
     public override void onHoverStart(Color hoverColor)
@@ -26,11 +31,40 @@ public class HazardMarker : InterfaceButton
 
     public override void press()
     {
-        removeButton.SetActive(!removeButton.activeSelf);
+        removeButton.gameObject.SetActive(!removeButton.gameObject.activeSelf);
+        
+        if (removeButton.gameObject.activeSelf)
+        {
+            StartCoroutine(hideRemoveButton(hideButtonDelay));
+        }
     }
 
     public void removeMarker()
     {
-        Destroy(gameObject);
+        Destroy(markerParent);
+    }
+
+    IEnumerator hideRemoveButton(float delay)
+    {
+        hidingButton = true;
+
+        float timeWaited = 0f;
+
+        while (timeWaited < delay)
+        {
+            yield return null;
+
+            if (removeButton.highlighted)
+            {
+                timeWaited = 0;
+            }
+            else
+            {
+                timeWaited += Time.deltaTime;
+            }
+        }
+
+        removeButton.gameObject.SetActive(false);
+        hidingButton = false;
     }
 }

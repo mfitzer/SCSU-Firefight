@@ -33,9 +33,12 @@ public class WorldAnchorManager : MonoBehaviour
     //const string exportFilePath = "C:\\Firefight-WorldAnchors";
     string exportFilePath;
 
+    public NavMeshAgent firefighterNavAgent;
+
     // Start is called before the first frame update
     void Start()
     {
+        firefighterNavAgent.enabled = false;
         savedWorldAnchors = new Dictionary<GameObject, WorldAnchor>();
         HololensConfigController.Instance.logMessage("Attempting to load anchor store...");
         WorldAnchorStore.GetAsync(AnchorStoreLoaded);
@@ -111,6 +114,8 @@ public class WorldAnchorManager : MonoBehaviour
                 savedWorldAnchors.Add(obj, savedAnchor);
             }*/
         }
+
+        firefighterNavAgent.enabled = true;
     }
 
     public void saveAnchors()

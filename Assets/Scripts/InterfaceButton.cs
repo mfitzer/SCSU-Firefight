@@ -14,6 +14,8 @@ public class InterfaceButton : MonoBehaviour
 
     UIManager uiManager;
 
+    public bool highlighted = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,12 +34,14 @@ public class InterfaceButton : MonoBehaviour
     {
         //Debug.Log("<color=purple>Hover start " + gameObject.name + "</color>");
         setMaterialColor(hoverColor);
+        highlighted = true;
     }
 
     public virtual void onHoverStop(Color neutralColor)
     {
         //Debug.Log("<color=purple>Hover stop " + gameObject.name + "</color>");
         setMaterialColor(neutralColor);
+        highlighted = false;
     }
 
     public virtual void press()
@@ -45,6 +49,7 @@ public class InterfaceButton : MonoBehaviour
         //Debug.Log("<color=purple>Press " + gameObject.name + "</color>");
         setMaterialColor(uiManager.buttonPressedColor);
         StartCoroutine(changeColor(uiManager.primaryColor, pressedFeedbackDuration));
+        highlighted = false;
         if (button)
         {
             button.onClick.Invoke();

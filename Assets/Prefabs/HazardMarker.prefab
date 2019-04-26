@@ -9,9 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4677142883425937520}
-  - component: {fileID: 4677142883425937521}
   - component: {fileID: 4677142883425937526}
-  - component: {fileID: 5814944566770951569}
   m_Layer: 0
   m_Name: HazardMarker
   m_TagString: HazardMarker
@@ -34,19 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 15.592001, z: 0}
---- !u!65 &4677142883425937521
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4677142883425937527}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.506512, y: 0.4263314, z: 0.021127108}
-  m_Center: {x: -0.0019690993, y: 0.75144047, z: 0.0020309363}
 --- !u!208 &4677142883425937526
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -63,21 +48,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &5814944566770951569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4677142883425937527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd0e15e4291168844b7bff7352aaca25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pressedFeedbackDuration: 0.25
-  removeButton: {fileID: 6397099771753988077}
-  icon: {fileID: 4677142884746194054}
 --- !u!1 &4677142883434489066
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +336,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5814944566770951569}
+      - m_Target: {fileID: 7182287235535989517}
         m_MethodName: removeMarker
         m_Mode: 1
         m_Arguments:
@@ -392,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressedFeedbackDuration: 0.25
+  highlighted: 0
 --- !u!1 &7298785975896039327
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,6 +373,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3750132800770302991}
   - component: {fileID: 4525732442347618370}
+  - component: {fileID: 6550557617941999328}
+  - component: {fileID: 7182287235535989517}
   m_Layer: 0
   m_Name: Marker
   m_TagString: Untagged
@@ -437,3 +410,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f841db5b07d0d9c4390b0eed157d77e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6550557617941999328
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7298785975896039327}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.506512, y: 0.4263314, z: 0.021127108}
+  m_Center: {x: -0.0019690993, y: 0.75144047, z: 0.0020309363}
+--- !u!114 &7182287235535989517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7298785975896039327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0e15e4291168844b7bff7352aaca25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedFeedbackDuration: 0.25
+  highlighted: 0
+  removeButton: {fileID: 6948129302472927003}
+  icon: {fileID: 4677142884746194054}
+  markerParent: {fileID: 4677142883425937527}
+  hideButtonDelay: 5
