@@ -123,6 +123,7 @@ public class Pathfinder : MonoBehaviour
 
         while (distanceLeft(getSourcePosition(), path) > distanceThreshold)
         {
+            displayDistanceLeft();
             lineRenderer.enabled = true;
 
             yield return new WaitForSeconds(refreshRate);
@@ -237,7 +238,7 @@ public class Pathfinder : MonoBehaviour
         return distance;
     }
 
-    void displayDistanceLeft(Vector3 distance)
+    void displayDistanceLeft()
     {
         distanceLeftDisplay.text = distanceLeft(getSourcePosition(), path).ToString("0.00") + " m"; //Display distance remaining in meters
 

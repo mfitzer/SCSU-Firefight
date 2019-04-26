@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
                 gazeStatus = GazeStatus.VALID;
                 gazeHitpoint = hitInfo.point; //Store hitInfo until next frame
 
-                if (uiState == UIState.DISPLAYING_MENU)
+                if (uiState == UIState.DISPLAYING_MENU || uiState == UIState.IDLE)
                 {
                     GameObject objHit = hitInfo.collider.gameObject;
                     if (buttonInGaze && buttonInGaze.gameObject != objHit) //Hit a button last frame and objHit is not that button
@@ -93,10 +93,12 @@ public class UIManager : MonoBehaviour
                     {
                         markerBeingPlaced.transform.position = gazeHitpoint;
                     }
+                    buttonInGaze = null;
                 }
             }
             else
             {
+                buttonInGaze = null;
                 gazeStatus = GazeStatus.INVALID;
                 //Debug.Log("<color=red>Gaze hit nothing</color>");
             }
@@ -209,7 +211,14 @@ public class UIManager : MonoBehaviour
         switch (uiState)
         {
             case UIState.IDLE:
-                openMenu();
+                if (buttonInGaze)
+                {
+                    pressButton();
+                }
+                else
+                {
+                    openMenu();
+                }
                 break;
             case UIState.DISPLAYING_MENU:
                 pressButton();

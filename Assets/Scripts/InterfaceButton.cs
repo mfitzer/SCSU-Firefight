@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof (Renderer))]
-[RequireComponent(typeof (Button))]
 public class InterfaceButton : MonoBehaviour
 {
     Renderer rend;
@@ -30,21 +28,21 @@ public class InterfaceButton : MonoBehaviour
         button = GetComponent<Button>();
     }
 
-    public void onHoverStart(Color hoverColor)
+    public virtual void onHoverStart(Color hoverColor)
     {
         //Debug.Log("<color=purple>Hover start " + gameObject.name + "</color>");
         setMaterialColor(hoverColor);
     }
 
-    public void onHoverStop(Color neutralColor)
+    public virtual void onHoverStop(Color neutralColor)
     {
         //Debug.Log("<color=purple>Hover stop " + gameObject.name + "</color>");
         setMaterialColor(neutralColor);
     }
 
-    public void press()
+    public virtual void press()
     {
-        Debug.Log("<color=purple>Press " + gameObject.name + "</color>");
+        //Debug.Log("<color=purple>Press " + gameObject.name + "</color>");
         setMaterialColor(uiManager.buttonPressedColor);
         StartCoroutine(changeColor(uiManager.primaryColor, pressedFeedbackDuration));
         if (button)
@@ -70,5 +68,24 @@ public class InterfaceButton : MonoBehaviour
 
         Debug.Log("Failed to setMaterialColor on " + gameObject.name);
         return false;
+    }
+
+    protected void setChildMaterialColors(Transform parent, Color color)
+    {
+        Renderer rend = parent.GetComponent<Renderer>();
+
+        if (rend)
+        {
+            rend.material.color = color;
+        }
+
+        //Set materials in children
+        foreach (Transform child in parent.transform)
+        {
+            if (child != parent)
+            {
+                setChildMaterialColors(child, color);
+            }
+        }
     }
 }
