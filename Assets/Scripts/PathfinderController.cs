@@ -8,22 +8,19 @@ public class PathfinderController : MonoBehaviour
 
     public bool update = false;
 
-    public Transform destination;
+    public Transform target;
+    Vector3 destination;
 
     // Start is called before the first frame update
     void Start()
     {
-        //findPath();
+        
     }
 
-    public void updateDestination()
+    public void updatePath()
     {
-        findPath();
-    }
-
-    void findPath()
-    {
-        if (pathfinder.findPath(destination.position))
+        destination = target.position;
+        if (pathfinder.findPath(destination))
         {
             Debug.Log("<color=green>Path found</color>");
         }
@@ -36,9 +33,15 @@ public class PathfinderController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (destination != target.position)
+        {
+            updatePath();
+        }
+
+        //Testing
         if (update)
         {
-            findPath();
+            updatePath();
 
             update = false;
         }

@@ -88,7 +88,7 @@ public class HololensGestureHandler : MonoBehaviour
         appState = AppState.NORMAL;
         enableGameObjects(normalObjs);
         ISELFInvisibility.makeInvisible();
-        pathfinderController.updateDestination();
+        pathfinderController.updatePath();
     }
 
     void exitNormalOp()

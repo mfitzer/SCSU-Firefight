@@ -31,7 +31,7 @@ public class WorldAnchorManager : MonoBehaviour
     List<byte> exportedAnchorStoreData;
 
     //const string exportFilePath = "C:\\Firefight-WorldAnchors";
-    public string exportFilePath;
+    string exportFilePath;
 
     // Start is called before the first frame update
     void Start()
