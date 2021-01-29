@@ -19,8 +19,6 @@ This application’'s main goal is to create a UI prototype for a firefighting a
 <p><a href="https://github.com/Microsoft/MixedRealityToolkit-Unity"> 
  Uses ** 
 
-Lit
-
 https://github.com/Microsoft’'s /Mixed Reality Toolkit</a></strong></p>
 
 <p><strong><a href="https://youtu.be/iEUiDiEEQTs">Demo Video-Unity</a></p>
@@ -29,6 +27,3 @@ https://github.com/Microsoft’'s /Mixed Reality Toolkit</a></strong></p>
 > Written with <a href="[StackEdit](https://stackedit.io/">StackEdit</a>.</strong></p>p>
 </blockquote>
 ).
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkxNjU2NDQ1OF19
--->
