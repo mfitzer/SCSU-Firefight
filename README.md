@@ -18,6 +18,6 @@ This application’'s main goal is to create a UI prototype for a firefighting a
 **Uses Microsoft’'s Mixed Reality Toolkit:**</strong></p>
 <p><a href="https://github.com/Microsoft/MixedRealityToolkit-Unity"> 
 
-https://github.com/Microsoft’'s /Mixed Reality Toolkit</a></strong></p>
+https://github.com/Microsoft/MixedRealityToolkit-Unity</a></strong></p>
 
 <p><strong><a href="https://youtu.be/iEUiDiEEQTs">Demo Video-Unity</a></p>
