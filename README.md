@@ -15,15 +15,9 @@ This application’'s main goal is to create a UI prototype for a firefighting a
 
 <p><strong>
 
-**Uses Microsoft’'s Mixed Reality Toolkit:</strong></p>
+**Uses Microsoft’'s Mixed Reality Toolkit:**</strong></p>
 <p><a href="https://github.com/Microsoft/MixedRealityToolkit-Unity"> 
- Uses ** 
 
 https://github.com/Microsoft’'s /Mixed Reality Toolkit</a></strong></p>
 
 <p><strong><a href="https://youtu.be/iEUiDiEEQTs">Demo Video-Unity</a></p>
-<blockquote>
-<p>
-> Written with <a href="[StackEdit](https://stackedit.io/">StackEdit</a>.</strong></p>p>
-</blockquote>
-).
